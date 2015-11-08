@@ -22,7 +22,8 @@ int
 main(int argc, char **argv)
 {
     int c;
-    char *uname = NULL;
+    char ** p = NULL;
+
 
     while (1) {
         int option_index = 0;
@@ -45,13 +46,17 @@ main(int argc, char **argv)
     }
 
     if (optind < argc) {
-        uname = argv[optind];
+        p = &argv[optind];
     }
 
-    if (uname == NULL) {
+    if (p == NULL || *p == NULL) {
         printf ("Hello world.\n");
     } else {
-        printf ("Hi, %s.\n", uname);
+        printf ("Hi,");
+        do {
+            printf (" %s", *p);
+        } while (*(++p));
+        printf (".\n");
     }
 
     printf( "(version: %s)\n", _VERSION );
